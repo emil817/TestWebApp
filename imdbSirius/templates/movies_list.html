@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <h1>MOVIES LIST</h1>
+    <div>
+        {%for movie in movies%}
+        <li>
+            {{movie.type_id}}: {{movie.name}}, Режиссёр: {{movie.director.name}}, Длительность: {{movie.duration}} минут (Оригинальное название: {{movies.original_name}})
+        </li>
+        {% endfor %}
+    </div>
+</html>

@@ -11,15 +11,23 @@ class OriginalName(models.Model):
 class Director(models.Model):
     name = models.CharField(max_length=64, unique=True)
 
+    def __str__(self) -> str:
+        return self.name
+
 class Type(models.Model):
     name = models.CharField(max_length=20, unique=True)
 
+    def __str__(self) -> str:
+        return self.name
+
 class Duration(models.Model):
-    name = models.IntegerField(max_length=10)
+    name = models.IntegerField()
+    def __str__(self) -> str:
+        return str(self.name)
 
 class Movie (models.Model):
     name = models.CharField(max_length=64)
-    originalName = models.OneToOneField(
+    original_name = models.OneToOneField(
         OriginalName,
         null=True,
         blank=True,
@@ -33,9 +41,12 @@ class Movie (models.Model):
     )
     director = models.ManyToManyField(
         Director,
-        related_name='movie'
+           related_name='movie'
     )
-    duration = models.ManyToManyField(
+    duration = models.OneToOneField(
         Duration,
-        related_name='movie'
+        related_name='movie',
+        blank=True,
+        null=True,
+        on_delete=models.DO_NOTHING,
     )
